@@ -1,0 +1,104 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+#include <iomanip>
+using namespace std;
+clock_t start, stop;
+double czas;
+
+double bubble(int a[])
+{
+   int i, j,temp,pass=0;
+   cout <<"Input list ...\n";
+   for(i = 0; i<10; i++) {
+      cout <<a[i]<<"\t";
+   }
+cout<<endl;
+for(i = 0; i<10; i++) {
+   for(j = i+1; j<10; j++)
+   {
+      if(a[j] < a[i]) {
+         temp = a[i];
+         a[i] = a[j];
+         a[j] = temp;
+      }
+   }
+pass++;
+}
+cout <<"Bombelkowo\n";
+for(i = 0; i<10; i++) {
+   cout <<a[i]<<"\t";
+}
+cout<<"\nNumber of passes taken to sort the list:"<<pass<<endl;
+return 0;
+}
+
+
+int czesc(int tablica[], int p, int r) 
+{
+int x = tablica[p]; 
+int i = p, j = r, w; 
+while (true) 
+while (tablica[j] > x) 
+j--;
+while (tablica[i] < x)
+i++;
+if (i < j) 
+{
+w = tablica[i];
+tablica[i] = tablica[j];
+tablica[j] = w;
+i++;
+j--;
+}
+else 
+return j;
+}
+
+ 
+void quicksort(int tablica[], int p, int r) 
+{
+int q;
+if (p < r)
+{  
+q = czesc(tablica,p,r); 
+quicksort(tablica, p, q); 
+quicksort(tablica, q+1, r);
+}
+}
+
+
+int main()
+{
+srand( time( NULL ) );
+int ile;
+int ilosc_liczb, i;
+cout << "Podaj ilosc licz do posortowania: ";
+cin >> ilosc_liczb;
+int *tablica = new int [ilosc_liczb]; 
+ 
+for (i = 0; i < ilosc_liczb; i++) 
+{
+cout << "Podaj liczba: ";
+cin >> tablica[i];
+}
+quicksort(tablica,0,ilosc_liczb-1); 
+
+for (i = 0; i < ilosc_liczb; i++) 
+cout << "tablica[" << i << "] = " << tablica[i] << endl;
+ 
+delete [] tablica;
+
+for (i = 0; i < ilosc_liczb; i++) 
+{
+cout << "Podaj liczba: ";
+cin >> tablica[i];
+}
+bubble(tablica);
+ for (i = 0; i < ilosc_liczb; i++) 
+cout << "tablica[" << i << "] = " << tablica[i] << endl;
+ 
+delete [] tablica;
+ 
+return 0;
+}
